@@ -159,6 +159,19 @@ If you want to commit generated artifacts in the release commit (e.g. [#96](http
 "release": "git add <file(s) to commit> && standard-version -a"
 ```
 
+### Use a specific context
+
+If you want to use a specific context, you can use `--context <file.json>` or `-c  <file.json>`
+
+Example:
+```json
+{
+  "host": "bitbucket",
+  "owner": "b",
+  "repository": "a"
+}
+```
+
 ### CLI Help
 
 ```sh
