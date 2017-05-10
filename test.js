@@ -228,6 +228,22 @@ describe('cli', function () {
     })
   })
 
+  describe('with context', function () {
+    it('should use context.json', function () {
+      writePackageJson('1.0.1')
+
+      commit('feat: new context flag')
+      commit('fix: patch release')
+      execCli('--context ../context.json').code.should.equal(0)
+
+      var content = fs.readFileSync('CHANGELOG.md', 'utf-8')
+      content.should.include('](bitbucket/b/a/commits/')
+      content.should.match(/patch release/)
+      content.should.match(/new context flag/)
+      shell.exec('git tag').stdout.should.match(/1\.1\.0/)
+    })
+  })
+
   describe('post-bump hook', function () {
     it('should run the post-bump hook when provided', function () {
       writePackageJson('1.0.0', {
